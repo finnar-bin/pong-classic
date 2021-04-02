@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Paddle/Paddle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ball/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Wall/Wall.tscn" type="PackedScene" id=3]
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color( 0.0196078, 0.419608, 0.419608, 1 )
+polygon = PoolVector2Array( 0, 0, 1024, 0, 1024, 600, 0, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Walls" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="WallTop" parent="Walls" instance=ExtResource( 3 )]
+
+[node name="WallBottom" parent="Walls" instance=ExtResource( 3 )]
+position = Vector2( 0, 592 )
+
+[node name="Goals" type="Node2D" parent="."]
+
+[node name="Player1Goal" type="StaticBody2D" parent="Goals"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Goals/Player1Goal"]
+polygon = PoolVector2Array( 0, 0, -8, 0, -8, 600, 0, 600 )
+
+[node name="Player2Goal" type="StaticBody2D" parent="Goals"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Goals/Player2Goal"]
+polygon = PoolVector2Array( 1024, 0, 1032, 0, 1032, 600, 1024, 600 )
+
+[node name="Net" type="Polygon2D" parent="."]
+position = Vector2( 0, 8 )
+scale = Vector2( 1, 0.973333 )
+offset = Vector2( 504, 0 )
+polygon = PoolVector2Array( 0, 0, 0, 600, 16, 600, 16, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 35, 300 )
+
+[node name="Player2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 974.846, 300 )
+is_player1 = false
+
+[node name="Ball" parent="." instance=ExtResource( 2 )]
+position = Vector2( 512, 300 )
